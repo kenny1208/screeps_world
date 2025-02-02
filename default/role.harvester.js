@@ -14,7 +14,7 @@ var roleHarvester = {
         }
         if (!creep.memory.delivering && creep.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
             creep.memory.delivering = true;
-            creep.say('🚚 deliver');
+            creep.say('🚚 go deliver');
         }
 
         // 3. 根據當前狀態執行動作
