@@ -9,7 +9,7 @@ var roleBuilder = {
         // 如果處於採集模式 (即 building 為 false) 且能量收集滿，就切換到建造／修補模式
         if (!creep.memory.building && creep.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
             creep.memory.building = true;
-            creep.say('⚡ build');
+            creep.say('⚡ build time');
         }
 
         // 2. 執行各模式下的行為
