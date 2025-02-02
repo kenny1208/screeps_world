@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy to Screeps
-        uses: screepers/screeps-github@v1.1.0
+        uses: screeps/screeps-github@v1.1.0
         with:
           token: ${{ secrets.SCREEPS_TOKEN }}
           branch: main
