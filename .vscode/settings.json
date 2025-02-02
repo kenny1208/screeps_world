@@ -1,0 +1,8 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.bracketSameLine": false,
+  "prettier.braceStyle": "allman",
+  "prettier.printWidth": 80,
+  "prettier.tabWidth": 4,
+  "prettier.useTabs": false
+}
