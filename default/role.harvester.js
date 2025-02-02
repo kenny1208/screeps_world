@@ -37,7 +37,7 @@ var roleHarvester = {
             // 如果找到目標，嘗試傳送能量；若不在傳送範圍則移動過去
             if (target) {
                 if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveTo(target, {visualizePathStyle: {stroke: '#8971f5'}});
                 }
             }
         } else {
