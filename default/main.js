@@ -27,7 +27,7 @@ module.exports.loop = function () {
         (creep) => creep.memory.role === "builder"
     );
     if (!spawn.spawning) {
-        if (harvesters.length < 8) {
+        if (harvesters.length < 9) {
             // 優先生成 harvester
             var newName = "Harvester" + Game.time;
             let result = spawn.spawnCreep([WORK, CARRY, MOVE, MOVE], newName, {
@@ -35,14 +35,14 @@ module.exports.loop = function () {
             });
             if (result === OK)
                 console.log("Spawning new harvester: " + newName);
-        } else if (upgraders.length < 18) {
+        } else if (upgraders.length < 19) {
             // 接著生成 upgrader
             var newName = "Upgrader" + Game.time;
             let result = spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
                 memory: { role: "upgrader" },
             });
             if (result === OK) console.log("Spawning new upgrader: " + newName);
-        } else if (builders.length < 4) {
+        } else if (builders.length < 5) {
             // 最後生成 builder
             var newName = "Builder" + Game.time;
             let result = spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
