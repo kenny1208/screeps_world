@@ -34,7 +34,8 @@ var roleHarvester = {
                 target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: (structure) =>
                         (structure.structureType === STRUCTURE_SPAWN ||
-                            structure.structureType === STRUCTURE_TOWER) &&
+                            structure.structureType === STRUCTURE_TOWER ||
+                            structure.structureType === STRUCTURE_STORAGE) &&
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0,
                 });
             }
