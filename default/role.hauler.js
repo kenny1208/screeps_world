@@ -12,9 +12,9 @@ var roleHauler = {
             creep.say("deliver");
         }
 
-        if (creep.memory.delivering) {
+        if (!creep.memory.delivering) {
             var storge = creep.room.storage;
-            if (stroage && storage.store[RESOURCE_ENERGY] > 0) {
+            if (storage && storage.store[RESOURCE_ENERGY] > 0) {
                 if (
                     creep.withdraw(storge, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE
                 ) {
