@@ -14,6 +14,10 @@ module.exports.loop = function () {
     var spawn = Game.spawns["Spawn1"];
 
     // 根據各角色在 Game.creeps 中的數量來判斷是否需要生成新 creep
+    var hauler = _.filter(
+        Game.creeps,
+        (creep) => creep.memory.role === "hauler"
+    );
     var harvesters = _.filter(
         Game.creeps,
         (creep) => creep.memory.role === "harvester"
@@ -26,8 +30,20 @@ module.exports.loop = function () {
         Game.creeps,
         (creep) => creep.memory.role === "builder"
     );
+
     if (!spawn.spawning) {
-        if (harvesters.length < 15) {
+        if (hauler.length < 1) {
+            // 優先生成 hauler
+            var newName = "Hauler" + Game.time;
+            let result = spawn.spawnCreep(
+                [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
+                newName,
+                {
+                    memory: { role: "hauler" },
+                }
+            );
+            if (result === OK) console.log("Spawning new hauler: " + newName);
+        } else if (harvesters.length < 15) {
             // 優先生成 harvester
             var newName = "Harvester" + Game.time;
             let result = spawn.spawnCreep(
@@ -60,7 +76,9 @@ module.exports.loop = function () {
     for (var name in Game.creeps) {
         var creep = Game.creeps[name];
 
-        if (creep.memory.role === "harvester") {
+        if (creep.memory.role === "hauler") {
+            roleHauler.run(creep);
+        } else if (creep.memory.role === "harvester") {
             roleHarvester.run(creep);
         } else if (creep.memory.role === "upgrader") {
             roleUpgrader.run(creep);
