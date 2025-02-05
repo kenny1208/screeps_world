@@ -4,6 +4,16 @@ var roleBuilder = require("role.builder");
 var roleHauler = require("role.hauler");
 
 module.exports.loop = function () {
+    var towers = Game.rooms["W3S57"].find(FIND_MY_STRUCTURES, {
+        filter: { structureType: STRUCTURE_TOWER },
+    });
+    for (let tower of towers) {
+        var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if (target) {
+            tower.attack(target);
+        }
+    }
+
     // 清理 Memory 中已死亡的 creep，並輸出死亡訊息
     for (var name in Memory.creeps) {
         if (!Game.creeps[name]) {
