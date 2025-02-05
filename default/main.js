@@ -32,7 +32,7 @@ module.exports.loop = function () {
     );
 
     if (!spawn.spawning) {
-        if (hauler.length < 1) {
+        if (hauler.length < 5) {
             // 優先生成 hauler
             var newName = "Hauler" + Game.time;
             let result = spawn.spawnCreep(
