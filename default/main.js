@@ -1,6 +1,7 @@
 var roleHarvester = require("role.harvester");
 var roleUpgrader = require("role.upgrader");
 var roleBuilder = require("role.builder");
+var roleHauler = require("role.hauler");
 
 module.exports.loop = function () {
     // 清理 Memory 中已死亡的 creep，並輸出死亡訊息
