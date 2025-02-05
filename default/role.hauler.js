@@ -24,7 +24,7 @@ var roleHauler = {
                 }
             }
         } else {
-            var target = creep.pos.findClosesByPath(FIND_STRUCTURES, {
+            var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (structure) =>
                     (structure.structureType === STRUCTURE_EXTENSION ||
                         structure.structureType === STRUCTURE_SPAWN ||
