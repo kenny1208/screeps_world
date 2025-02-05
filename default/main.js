@@ -30,9 +30,13 @@ module.exports.loop = function () {
         if (harvesters.length < 15) {
             // 優先生成 harvester
             var newName = "Harvester" + Game.time;
-            let result = spawn.spawnCreep([WORK, CARRY, MOVE, MOVE], newName, {
-                memory: { role: "harvester" },
-            });
+            let result = spawn.spawnCreep(
+                [WORK, WORK, CARRY, MOVE, MOVE, RANGED_ATTACK],
+                newName,
+                {
+                    memory: { role: "harvester" },
+                }
+            );
             if (result === OK)
                 console.log("Spawning new harvester: " + newName);
         } else if (upgraders.length < 15) {

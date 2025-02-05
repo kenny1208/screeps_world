@@ -6,6 +6,16 @@ var roleHarvester = {
         // 取得 creep 名稱中的數字部分，並根據單雙數決定採集哪個來源
         var creepNumber = parseInt(creep.name.match(/\d+$/));
         var source = creepNumber % 2 === 0 ? sources[1] : sources[0];
+        var hostile = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
+
+        if (hostile) {
+            if (creep.harvest(hostile) === ERR_NOT_IN_RANGE) {
+                creep.moveTo(hostile, {
+                    visualizePathStyle: { stroke: "#ffaa00" },
+                });
+            }
+            return;
+        }
 
         // 2. 狀態切換邏輯
         if (creep.memory.delivering && creep.store[RESOURCE_ENERGY] === 0) {
