@@ -26,7 +26,7 @@ var roleHauler = {
                     ERR_NOT_IN_RANGE
                 ) {
                     creep.moveTo(tombstone, {
-                        visualizePathStyle: { stroke: "#ff8800" },
+                        visualizePathStyle: { stroke: "#fa3f32" },
                     });
                 }
             } else {
@@ -69,7 +69,7 @@ var roleHauler = {
                     creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE
                 ) {
                     creep.moveTo(target, {
-                        visualizePathStyle: { stroke: "#ffffff" },
+                        visualizePathStyle: { stroke: "#fa3f32" },
                     });
                 }
             }
