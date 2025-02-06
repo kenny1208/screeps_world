@@ -31,42 +31,42 @@ var roleHarvester = {
             creep.say("🚚 deliver");
         }
 
-        // 3. 根據當前狀態執行動作
-        if (creep.memory.delivering) {
-            // 先尋找有空間的 Extensions
-            var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                filter: (structure) =>
-                    structure.structureType === STRUCTURE_EXTENSION &&
-                    structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0,
-            });
-
-            // 如果 Extensions 已滿，再尋找 Spawn & Tower
-            if (!target) {
-                target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                    filter: (structure) =>
-                        (structure.structureType === STRUCTURE_SPAWN ||
-                            structure.structureType === STRUCTURE_TOWER ||
-                            structure.structureType === STRUCTURE_STORAGE) &&
-                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0,
-                });
-            }
-
-            // 如果找到目標，嘗試傳送能量；若不在傳送範圍則移動過去
-            if (target) {
-                if (
-                    creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE
-                ) {
-                    creep.moveTo(target, {
-                        visualizePathStyle: { stroke: "#8971f5" },
-                    });
-                }
-            }
-        } else {
-            // 採集能量模式：採集指定的能源來源
-            if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
+        //  根據當前狀態執行動作
+        if (!creep.memory.delivering) {
+            //  挖礦邏輯
+            var source = creep.pos.findClosestByPath(FIND_SOURCES);
+            if (source && creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {
                     visualizePathStyle: { stroke: "#ffaa00" },
                 });
+            }
+        } else {
+            // 先檢查記憶中的目標是否還需要能量
+            var target = Game.getObjectById(creep.memory.targetId);
+            if (!target || target.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
+                // 重新尋找新目標（**只在當前目標滿了時執行**）
+                target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                    filter: (structure) =>
+                        (structure.structureType === STRUCTURE_EXTENSION ||
+                            structure.structureType === STRUCTURE_SPAWN ||
+                            structure.structureType === STRUCTURE_STRORAGE) &&
+                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0,
+                });
+
+                if (target) {
+                    creep.memory.targetId = target.id; // 記住新的目標
+                }
+            }
+
+            // 傳送能量到固定目標
+            if (target) {
+                if (
+                    creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE
+                ) {
+                    creep.moveTo(target, {
+                        visualizePathStyle: { stroke: "#ffffff" },
+                    });
+                }
             }
         }
     },
