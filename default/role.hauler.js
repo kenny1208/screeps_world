@@ -13,26 +13,43 @@ var roleHauler = {
             creep.say("deliver");
         }
 
-        // 如果 Storage 內沒有能量，讓 Hauler 變成 Harvester
-        var storage = creep.room.storage;
+        // 如果 Hauler 還沒滿，優先收集屍體內的能量
         if (!creep.memory.delivering) {
-            if (storage && storage.store[RESOURCE_ENERGY] > 0) {
-                // 正常情況：從 Storage 取能量
+            var tombstone = creep.pos.findClosestByPath(FIND_TOMBSTONES, {
+                filter: (t) => t.store[RESOURCE_ENERGY] > 0,
+            });
+
+            if (tombstone) {
+                // 如果有屍體內有能量，先去撿
                 if (
-                    creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE
+                    creep.withdraw(tombstone, RESOURCE_ENERGY) ==
+                    ERR_NOT_IN_RANGE
                 ) {
-                    creep.moveTo(storage, {
-                        visualizePathStyle: { stroke: "#ffaa00" },
+                    creep.moveTo(tombstone, {
+                        visualizePathStyle: { stroke: "#ff8800" },
                     });
                 }
             } else {
-                // Storage 沒能量，讓 Hauler 變成 Harvester
-                var source = creep.pos.findClosestByPath(FIND_SOURCES);
-                if (source) {
-                    if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(source, {
+                // 如果沒屍體能量，從 Storage 取能量
+                var storage = creep.room.storage;
+                if (storage && storage.store[RESOURCE_ENERGY] > 0) {
+                    if (
+                        creep.withdraw(storage, RESOURCE_ENERGY) ==
+                        ERR_NOT_IN_RANGE
+                    ) {
+                        creep.moveTo(storage, {
                             visualizePathStyle: { stroke: "#ffaa00" },
                         });
+                    }
+                } else {
+                    // 如果 Storage 也沒能量，讓 Hauler 變成 Harvester
+                    var source = creep.pos.findClosestByPath(FIND_SOURCES);
+                    if (source) {
+                        if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(source, {
+                                visualizePathStyle: { stroke: "#ffaa00" },
+                            });
+                        }
                     }
                 }
             }
