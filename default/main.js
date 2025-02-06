@@ -43,7 +43,7 @@ module.exports.loop = function () {
     );
 
     if (!spawn.spawning) {
-        if (harvesters.length < 20) {
+        if (harvesters.length < 15) {
             // 生成 harvester
             var newName = "Harvester" + Game.time;
             let result = spawn.spawnCreep(
