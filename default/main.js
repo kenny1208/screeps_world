@@ -43,19 +43,8 @@ module.exports.loop = function () {
     );
 
     if (!spawn.spawning) {
-        if (hauler.length < 3) {
-            // 優先生成 hauler
-            var newName = "Hauler" + Game.time;
-            let result = spawn.spawnCreep(
-                [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
-                newName,
-                {
-                    memory: { role: "hauler" },
-                }
-            );
-            if (result === OK) console.log("Spawning new hauler: " + newName);
-        } else if (harvesters.length < 20) {
-            // 優先生成 harvester
+        if (harvesters.length < 20) {
+            // 生成 harvester
             var newName = "Harvester" + Game.time;
             let result = spawn.spawnCreep(
                 [WORK, WORK, CARRY, MOVE, MOVE, RANGED_ATTACK],
@@ -66,6 +55,17 @@ module.exports.loop = function () {
             );
             if (result === OK)
                 console.log("Spawning new harvester: " + newName);
+        } else if (hauler.length < 3) {
+            // 生成 hauler
+            var newName = "Hauler" + Game.time;
+            let result = spawn.spawnCreep(
+                [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
+                newName,
+                {
+                    memory: { role: "hauler" },
+                }
+            );
+            if (result === OK) console.log("Spawning new hauler: " + newName);
         } else if (upgraders.length < 10) {
             // 接著生成 upgrader
             var newName = "Upgrader" + Game.time;
