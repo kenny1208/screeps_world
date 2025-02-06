@@ -27,6 +27,7 @@ var roleUpgrader = {
             // 取得 creep 名稱中的數字部分，利用單雙數決定採集的能源點
             var creepNumber = parseInt(creep.name.match(/\d+$/));
             var source = creepNumber % 2 === 0 ? sources[0] : sources[1];
+            source = sources[0];
             if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {
                     visualizePathStyle: { stroke: "#ffaa00" },
