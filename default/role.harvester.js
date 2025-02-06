@@ -6,6 +6,7 @@ var roleHarvester = {
         // 取得 creep 名稱中的數字部分，並根據單雙數決定採集哪個來源
         var creepNumber = parseInt(creep.name.match(/\d+$/));
         var source = creepNumber % 2 === 0 ? sources[0] : sources[1];
+        source = sources[0];
         var hostile = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
 
         if (hostile) {
