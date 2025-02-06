@@ -43,7 +43,7 @@ module.exports.loop = function () {
     );
 
     if (!spawn.spawning) {
-        if (harvesters.length < 15) {
+        if (harvesters.length < 20) {
             // 生成 harvester
             var newName = "Harvester" + Game.time;
             let result = spawn.spawnCreep(
@@ -73,7 +73,7 @@ module.exports.loop = function () {
                 memory: { role: "upgrader" },
             });
             if (result === OK) console.log("Spawning new upgrader: " + newName);
-        } else if (builders.length < 6) {
+        } else if (builders.length < 3) {
             // 最後生成 builder
             var newName = "Builder" + Game.time;
             let result = spawn.spawnCreep([WORK, CARRY, MOVE], newName, {
