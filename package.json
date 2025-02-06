@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/kenny1208/screeps_world/issues"
   },
-  "homepage": "https://github.com/kenny1208/screeps_world#readme"
+  "homepage": "https://github.com/kenny1208/screeps_world#readme",
+  "dependencies": {
+    "screeps_world": "file:"
+  }
 }

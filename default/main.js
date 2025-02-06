@@ -59,7 +59,7 @@ module.exports.loop = function () {
             // 生成 hauler
             var newName = "Hauler" + Game.time;
             let result = spawn.spawnCreep(
-                [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
+                [CARRY, CARRY, CARRY, MOVE, MOVE, WORK],
                 newName,
                 {
                     memory: { role: "hauler" },
