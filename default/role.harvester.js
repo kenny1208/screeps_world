@@ -47,8 +47,7 @@ var roleHarvester = {
                 // 重新尋找新目標（**只在當前目標滿了時執行**）
                 target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: (structure) =>
-                        (structure.structureType === STRUCTURE_EXTENSION ||
-                            structure.structureType === STRUCTURE_SPAWN ||
+                        (structure.structureType === STRUCTURE_SPAWN ||
                             structure.structureType === STRUCTURE_STORAGE) &&
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0,
                 });
