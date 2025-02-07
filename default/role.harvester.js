@@ -5,6 +5,7 @@ var roleHarvester = {
 
         // 2️⃣ 根據單雙數決定目標房間
         var targetRoom = creepNumber % 2 === 0 ? "W3S57" : "W3S58";
+        var homeRoom = "W3S57";
 
         if (creep.pos.y === 49) {
             creep.moveTo(creep.pos.x, 45);
@@ -20,6 +21,16 @@ var roleHarvester = {
                 visualizePathStyle: { stroke: "#ffaa00" },
             });
             creep.say("🚶 Moving");
+            return;
+        }
+        if (
+            creep.room.name == targetRoom &&
+            creep.store.getFreeCapacity() === 0
+        ) {
+            creep.moveTo(new RoomPosition(25, 25, "homeRoom"), {
+                visualizePathStyle: { stroke: "#af47f5" },
+            });
+            creep.say("🚶Back");
             return;
         }
 
