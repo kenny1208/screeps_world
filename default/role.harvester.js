@@ -12,7 +12,10 @@ var roleHarvester = {
         }
 
         // 3️⃣ 如果不在目標房間，先移動過去
-        if (creep.room.name !== targetRoom) {
+        if (
+            creep.room.name !== targetRoom &&
+            creep.store[RESOURCE_ENERGY] === 0
+        ) {
             creep.moveTo(new RoomPosition(25, 25, targetRoom), {
                 visualizePathStyle: { stroke: "#ffaa00" },
             });
