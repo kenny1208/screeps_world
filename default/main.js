@@ -4,21 +4,29 @@ var roleBuilder = require("role.builder");
 var roleHauler = require("role.hauler");
 
 module.exports.loop = function () {
-    var towers = Game.rooms["W3S57"].find(FIND_MY_STRUCTURES, {
-        filter: { structureType: STRUCTURE_TOWER },
-    });
-    for (let tower of towers) {
-        var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        if (target) {
-            tower.attack(target);
+    if (!Memory.towerIds || Game.time % 100 === 0) {
+        Memory.towerIds = Game.rooms["W3S57"]
+            .find(FIND_MY_STRUCTURES, {
+                filter: { structureType: STRUCTURE_TOWER },
+            })
+            .map((tower) => tower.id);
+    }
+
+    for (let id of Memory.towerIds) {
+        let tower = Game.getObjectById(id);
+        if (tower) {
+            let target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+            if (target) tower.attack(target);
         }
     }
 
     // 清理 Memory 中已死亡的 creep，並輸出死亡訊息
-    for (var name in Memory.creeps) {
-        if (!Game.creeps[name]) {
-            console.log("Creep died: " + name);
-            delete Memory.creeps[name];
+    if (Game.time % 500 === 0) {
+        for (let name in Memory.creeps) {
+            if (!Game.creeps[name]) {
+                console.log("Creep died: " + name);
+                delete Memory.creeps[name];
+            }
         }
     }
 
