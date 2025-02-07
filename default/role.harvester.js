@@ -6,6 +6,11 @@ var roleHarvester = {
         // 2️⃣ 根據單雙數決定目標房間
         var targetRoom = creepNumber % 2 === 0 ? "W3S57" : "W3S58";
 
+        if (creep.pos.y === 49) {
+            creep.moveTo(creep.pos.x, 47);
+            return;
+        }
+
         // 3️⃣ 如果不在目標房間，先移動過去
         if (creep.room.name !== targetRoom) {
             creep.moveTo(new RoomPosition(25, 25, targetRoom), {
