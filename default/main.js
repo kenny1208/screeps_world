@@ -69,9 +69,13 @@ module.exports.loop = function () {
         } else if (upgraders.length < 10) {
             // 接著生成 upgrader
             var newName = "Upgrader" + Game.time;
-            let result = spawn.spawnCreep([WORK, CARRY, MOVE, MOVE], newName, {
-                memory: { role: "upgrader" },
-            });
+            let result = spawn.spawnCreep(
+                [WORK, WORK, CARRY, MOVE, MOVE],
+                newName,
+                {
+                    memory: { role: "upgrader" },
+                }
+            );
             if (result === OK) console.log("Spawning new upgrader: " + newName);
         } else if (builders.length < 3) {
             // 最後生成 builder
