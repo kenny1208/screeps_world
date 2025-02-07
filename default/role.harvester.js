@@ -7,7 +7,7 @@ var roleHarvester = {
         var targetRoom = creepNumber % 2 === 0 ? "W3S57" : "W3S58";
 
         if (creep.pos.y === 49) {
-            creep.moveTo(creep.pos.x, 47);
+            creep.moveTo(creep.pos.x, 45);
             return;
         }
 
