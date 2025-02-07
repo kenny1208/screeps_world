@@ -1,9 +1,9 @@
 var roleHarvester = {
     run: function (creep) {
-        // 1️⃣ 取得 creep 名稱中的數字部分
+        // 取得 creep 名稱中的數字部分
         var creepNumber = parseInt(creep.name.match(/\d+$/));
 
-        // 2️⃣ 根據單雙數決定目標房間
+        // 根據單雙數決定目標房間
         var targetRoom = creepNumber % 2 === 0 ? "W3S57" : "W3S58";
         var homeRoom = "W3S57";
 
@@ -12,7 +12,7 @@ var roleHarvester = {
             return;
         }
 
-        // 3️⃣ 如果不在目標房間，先移動過去
+        // 如果不在目標房間，先移動過去
         if (
             creep.room.name !== targetRoom &&
             creep.store[RESOURCE_ENERGY] === 0
@@ -27,14 +27,14 @@ var roleHarvester = {
             creep.room.name == targetRoom &&
             creep.store.getFreeCapacity() === 0
         ) {
-            creep.moveTo(new RoomPosition(25, 25, "homeRoom"), {
+            creep.moveTo(new RoomPosition(25, 25, homeRoom), {
                 visualizePathStyle: { stroke: "#af47f5" },
             });
             creep.say("🚶Back");
             return;
         }
 
-        // 4️⃣ 找到最近的敵人
+        // 找到最近的敵人
         var hostile = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
 
         if (hostile) {
@@ -62,11 +62,11 @@ var roleHarvester = {
             return; // 當有敵人時，優先執行戰鬥，不做其他行動
         }
 
-        // 5️⃣ 確定採集哪個 Source
+        // 確定採集哪個 Source
         var sources = creep.room.find(FIND_SOURCES);
         var source = creepNumber % 2 === 0 ? sources[1] : sources[0];
 
-        // 6️⃣ 狀態切換邏輯
+        // 狀態切換邏輯
         if (creep.memory.delivering && creep.store[RESOURCE_ENERGY] === 0) {
             creep.memory.delivering = false;
             creep.say("🔄 harvest");
@@ -76,7 +76,7 @@ var roleHarvester = {
             creep.say("🚚 deliver");
         }
 
-        // 7️⃣ 如果 Creep 需要採礦
+        // 如果 Creep 需要採礦
         if (!creep.memory.delivering) {
             if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {
@@ -84,7 +84,7 @@ var roleHarvester = {
                 });
             }
         }
-        // 8️⃣ 如果 Creep 要送能量
+        // 如果 Creep 要送能量
         else {
             var target = Game.getObjectById(creep.memory.targetId);
             if (
