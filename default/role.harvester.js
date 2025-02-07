@@ -28,7 +28,7 @@ var roleHarvester = {
             creep.room.name == targetRoom &&
             creep.store.getFreeCapacity() === 0
         ) {
-            creep.moveTo(new RoomPosition(homeRoom), {
+            creep.moveTo(new RoomPosition(22, 23, homeRoom), {
                 visualizePathStyle: { stroke: "#af47f5" },
             });
             creep.say("🚶Back");
