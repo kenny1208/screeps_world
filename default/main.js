@@ -54,7 +54,7 @@ module.exports.loop = function () {
                 }
             );
             if (result === OK) console.log("Spawning new hauler: " + newName);
-        } else if (harvesters.length < 20) {
+        } else if (harvesters.length < 30) {
             // 生成 harvester
             var newName = "Harvester" + Game.time;
             let result = spawn.spawnCreep(
