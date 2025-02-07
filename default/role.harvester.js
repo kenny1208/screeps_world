@@ -23,11 +23,12 @@ var roleHarvester = {
             creep.say("🚶 Moving");
             return;
         }
+
         if (
             creep.room.name == targetRoom &&
             creep.store.getFreeCapacity() === 0
         ) {
-            creep.moveTo(new RoomPosition(25, 25, homeRoom), {
+            creep.moveTo(new RoomPosition(homeRoom), {
                 visualizePathStyle: { stroke: "#af47f5" },
             });
             creep.say("🚶Back");
